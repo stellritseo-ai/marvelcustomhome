@@ -29,14 +29,33 @@ export function Reveal({
     return () => io.disconnect();
   }, []);
   return (
-    <Tag ref={ref} data-shown={shown} className={`reveal ${className}`} style={{ transitionDelay: `${delay}ms` }}>
+    <Tag
+      ref={ref}
+      data-shown={shown}
+      className={`reveal ${className}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
       {children}
     </Tag>
   );
 }
 
-export function Parallax({ src, alt, className = "", speed = 0.12, eager = false, width, height }: {
-  src: string; alt: string; className?: string; speed?: number; eager?: boolean; width?: number; height?: number;
+export function Parallax({
+  src,
+  alt,
+  className = "",
+  speed = 0.12,
+  eager = false,
+  width,
+  height,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+  speed?: number;
+  eager?: boolean;
+  width?: number;
+  height?: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [y, setY] = useState(0);
@@ -55,12 +74,21 @@ export function Parallax({ src, alt, className = "", speed = 0.12, eager = false
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => { window.removeEventListener("scroll", onScroll); cancelAnimationFrame(raf); };
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
   }, [speed]);
   return (
-    <div ref={ref} className={`${className.includes("absolute") ? "" : "relative"} overflow-hidden ${className}`}>
+    <div
+      ref={ref}
+      className={`${className.includes("absolute") ? "" : "relative"} overflow-hidden ${className}`}
+    >
       <img
-        src={src} alt={alt} width={width} height={height}
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
         loading={eager ? "eager" : "lazy"}
         className="absolute inset-0 h-[120%] w-full -top-[10%] object-cover will-change-transform"
         style={{ transform: `translate3d(0, ${y}px, 0)` }}

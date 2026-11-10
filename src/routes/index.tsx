@@ -1,6 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Hero, Intro, Services, Process, Gallery, Collections, Portfolio, Why, Testimonials, CtaBand } from "@/components/site/Sections";
+import { CollectionsSection } from "@/components/site/CollectionsSection";
 import { ContactSection } from "@/components/site/ContactSection";
+import { CtaSection } from "@/components/site/CtaSection";
+import { GallerySection } from "@/components/site/GallerySection";
+import { HeroSection } from "@/components/site/HeroSection";
+import { PortfolioSection } from "@/components/site/PortfolioSection";
+import { ProcessSection } from "@/components/site/ProcessSection";
+import { ServicesSection } from "@/components/site/ServicesSection";
+import { TestimonialsSection } from "@/components/site/TestimonialsSection";
+import { WelcomeSection } from "@/components/site/WelcomeSection";
+import { WhySection } from "@/components/site/WhySection";
 import { localBusinessJsonLd, pageHead } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
@@ -17,16 +26,16 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <Hero />
-      <Intro />
-      <Services />
-      <Process />
-      <Gallery />
-      <Collections />
-      <Portfolio />
-      <Why />
-      <Testimonials />
-      <CtaBand />
+      <HeroSection />
+      <WelcomeSection />
+      <ServicesSection />
+      <ProcessSection />
+      <GallerySection />
+      <CollectionsSection />
+      <PortfolioSection />
+      {/* <WhySection /> */}
+      <TestimonialsSection />
+      <CtaSection />
       <ContactSection />
     </>
   );
