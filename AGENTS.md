@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Site sections live in `src/components/site/`; route files compose them so every page shares one design language.
+- Contact form validation is a single zod schema in `src/lib/contact-schema.ts`, shared by the browser form and the server function, so rules never drift.
