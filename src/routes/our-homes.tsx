@@ -1,35 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CollectionsSection } from "@/components/site/CollectionsSection";
 import { CtaSection } from "@/components/site/CtaSection";
-import { GallerySection } from "@/components/site/GallerySection";
-import { HomesSection } from "@/components/site/HomesSection";
-import { PageHeader } from "@/components/site/PageHeader";
-import { IMAGES } from "@/lib/images";
-import { pageHead } from "@/lib/site";
+import { OurHomesComparison } from "@/components/site/OurHomesComparison";
+import { OurHomesHero } from "@/components/site/OurHomesHero";
+import { OurHomesShowcase } from "@/components/site/OurHomesShowcase";
+import { localBusinessJsonLd, pageHead } from "@/lib/site";
 
 export const Route = createFileRoute("/our-homes")({
-  head: () =>
-    pageHead(
-      "Our Homes | Custom Residences & Collections — Marvel Custom Homes",
-      "Explore custom home architectural studies, bespoke living spaces, kitchens, baths and exteriors crafted by Marvel Custom Homes.",
+  head: () => ({
+    ...pageHead(
+      "Our Homes | Traditional, Farm House & Modern Design — Marvel Custom Homes",
+      "Explore Traditional, Farm House, and Modern Design custom homes crafted by Marvel Custom Homes across Dallas-Fort Worth and North Texas.",
     ),
-  component: () => (
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusinessJsonLd) }],
+  }),
+  component: OurHomesPage,
+});
+
+function OurHomesPage() {
+  return (
     <>
-      <PageHeader
-        eyebrow="Our Homes"
-        title={
-          <>
-            Bespoke <em className="italic">Residences.</em>
-          </>
-        }
-        intro="Custom homes shaped around Dallas light, tranquil courtyards and natural materials built to endure generations."
-        img={IMAGES.exterior}
-        alt="Custom limestone custom residence crafted in North Texas"
-      />
-      <HomesSection />
-      <CollectionsSection />
-      <GallerySection />
+      <OurHomesHero />
+      <OurHomesShowcase />
+      <OurHomesComparison />
       <CtaSection />
     </>
-  ),
-});
+  );
+}
