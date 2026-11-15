@@ -66,7 +66,7 @@ export function Header() {
   const collapsedWidthRef = useRef(0);
   const rafMeasureRef = useRef<number | null>(null);
 
-  const overHero = path === "/" && !scrolled;
+  const overHero = (path === "/" || path === "/about") && !scrolled;
 
   function positionServicesPopover() {
     const submenu = submenuRef.current;
