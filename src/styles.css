@@ -98,6 +98,13 @@
     background: var(--champagne);
     color: var(--graphite);
   }
+  dialog:modal {
+    overscroll-behavior: contain;
+  }
+  dialog::backdrop {
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
 }
 
 @utility eyebrow {

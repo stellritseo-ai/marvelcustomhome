@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Expand, Sparkles, X } from "lucide-react";
 import b1 from "@/assets/b1.jpg";
 import b2 from "@/assets/b2.png";
@@ -17,11 +17,11 @@ import welcome2 from "@/assets/welcome2.png";
 import { Eyebrow } from "./Eyebrow";
 import { Reveal } from "./Reveal";
 
-/* 05 — INSPIRATION GALLERY */
-type Category =
+/* 05 — INSPIRATION GALLERY & SHARED WORKS ARCHIVE */
+export type Category =
   "All" | "Exteriors & Estates" | "Living & Kitchens" | "Suites & Baths" | "Architecture & Craft";
 
-interface GalleryItem {
+export interface GalleryItem {
   id: string;
   img: string;
   title: string;
@@ -30,9 +30,13 @@ interface GalleryItem {
   cls: string;
   w: number;
   h: number;
+  location: string;
+  scope: string;
+  materials: string;
+  description: string;
 }
 
-const CATEGORIES: readonly Category[] = [
+export const CATEGORIES: readonly Category[] = [
   "All",
   "Exteriors & Estates",
   "Living & Kitchens",
@@ -40,7 +44,7 @@ const CATEGORIES: readonly Category[] = [
   "Architecture & Craft",
 ] as const;
 
-const GALLERY: readonly GalleryItem[] = [
+export const GALLERY = [
   {
     id: "01",
     img: b1,
@@ -50,6 +54,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "sm:col-span-2 md:col-span-7 md:row-span-2",
     w: 1920,
     h: 1080,
+    location: "Rockwall, TX",
+    scope: "Ground-Up Custom Estate",
+    materials: "Hand-Dressed Limestone, Clay Tile & Architectural Bronze",
+    description:
+      "A monumental custom residence balancing classical symmetry, arched fenestration, and warm twilight landscape illumination across manicured North Texas grounds.",
   },
   {
     id: "02",
@@ -60,6 +69,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-5 md:row-span-2",
     w: 1600,
     h: 1104,
+    location: "Dallas, TX",
+    scope: "Bespoke Culinary Architecture",
+    materials: "Bookmatched Calacatta Marble, Rift-Cut White Oak & Unlacquered Brass",
+    description:
+      "Engineered for effortless entertaining and daily culinary craft, anchored by a monolithic waterfall island, concealed appliance walls, and tailored task lighting.",
   },
   {
     id: "03",
@@ -70,6 +84,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-4 md:row-span-2",
     w: 1600,
     h: 1104,
+    location: "Heath, TX",
+    scope: "Formal Living & Entertaining Volume",
+    materials: "Full-Height Thermal Glazing, Honed Limestone Hearth & Plaster Walls",
+    description:
+      "Soaring ceiling volume meets intimate warmth through natural daylight choreography, a floor-to-ceiling stone fireplace, and seamless sightlines to the rear loggia.",
   },
   {
     id: "04",
@@ -80,6 +99,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-4 md:row-span-2",
     w: 1920,
     h: 1080,
+    location: "McKinney, TX",
+    scope: "Luxury Residential Commission",
+    materials: "Cut Texas Limestone, Steel Casements & Cedar Soffits",
+    description:
+      "Designed to command presence from arrival to dusk, pairing crisp masonry coursing with expansive glazing that transforms the facade into a warm lantern at night.",
   },
   {
     id: "05",
@@ -90,6 +114,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-4 md:row-span-2",
     w: 1600,
     h: 1067,
+    location: "Dallas, TX",
+    scope: "Complete Interior Finish-Out",
+    materials: "Custom Millwork Coffers, Recessed Cove Illumination & Hardwood Flooring",
+    description:
+      "Precision architectural carpentry and layered lighting transform interior volumes into refined gallery-grade living spaces with zero-tolerance joinery.",
   },
   {
     id: "06",
@@ -100,6 +129,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-5 md:row-span-2",
     w: 1600,
     h: 1067,
+    location: "Mansfield, TX",
+    scope: "Turnkey Design-Build Delivery",
+    materials: "Post-Tension Foundation, Structural Steel & Brick-and-Stone Envelope",
+    description:
+      "Full-lifecycle residential construction managed from site grading and structural framing to mechanical systems and white-glove architectural completion.",
   },
   {
     id: "07",
@@ -110,6 +144,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-7 md:row-span-2",
     w: 1600,
     h: 1067,
+    location: "Rockwall, TX",
+    scope: "Primary Bath & Dressing Sanctuary",
+    materials: "Veined Quartzite Slab, Custom Fluted Cabinetry & Brushed Brass Sconces",
+    description:
+      "A symmetrical dual-vanity composition crafted for serene morning routines, featuring integrated LED mirror backlighting, furniture-grade millwork, and artisan hardware.",
   },
   {
     id: "08",
@@ -120,6 +159,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-4 md:row-span-2",
     w: 1920,
     h: 1080,
+    location: "Midlothian, TX",
+    scope: "Acreage Estate Architecture",
+    materials: "Quarried Limestone, Timber Beams & Custom Ironwork",
+    description:
+      "Set on private North Texas acreage, this estate wraps around a sheltered courtyard sanctuary designed for four-season indoor-outdoor family gathering.",
   },
   {
     id: "09",
@@ -130,6 +174,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-4 md:row-span-2",
     w: 1504,
     h: 1104,
+    location: "Heath, TX",
+    scope: "Primary Bedroom Wing",
+    materials: "Warm White Oak Wall Paneling, Acoustic Textiles & Indirect Cove Light",
+    description:
+      "Conceived as a private five-star retreat, combining tactile wood paneling, hushed acoustics, and perimeter illumination for restorative calm.",
   },
   {
     id: "10",
@@ -140,6 +189,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-4 md:row-span-2",
     w: 1104,
     h: 1504,
+    location: "McKinney, TX",
+    scope: "Resort-Caliber Wet Room & Spa",
+    materials: "Honed Roman Travertine, American Walnut & Freestanding Sculptural Tub",
+    description:
+      "Floor-to-ceiling natural stone slabs envelop a freestanding soaking vessel and frameless rain shower, bringing thermal spa tranquility home.",
   },
   {
     id: "11",
@@ -150,6 +204,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-6 md:row-span-2",
     w: 1600,
     h: 1067,
+    location: "Dallas Studio, TX",
+    scope: "Pre-Construction & Architectural Planning",
+    materials: "3D BIM Modeling, Material Sample Library & Structural Engineering",
+    description:
+      "Every signature residence begins at our Dallas design table—aligning site orientation, elevation aesthetics, material palettes, and budget transparency before ground breaks.",
   },
   {
     id: "12",
@@ -160,6 +219,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-6 md:row-span-2",
     w: 1920,
     h: 1080,
+    location: "Fate, TX",
+    scope: "Contemporary Custom Estate",
+    materials: "Cantilevered Steel Canopy, Cedar Cladding & Veined Stone",
+    description:
+      "Clean horizontal planes, warm natural cedar accents, and expansive glass walls dissolve the boundary between architectural interior and resort terrace.",
   },
   {
     id: "13",
@@ -170,6 +234,11 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-7 md:row-span-2",
     w: 1600,
     h: 1067,
+    location: "Mansfield, TX",
+    scope: "Custom Estate Elevation & Motor Court",
+    materials: "Artisan Stone Masonry, Custom Iron Entry Doors & Architectural Uplighting",
+    description:
+      "A dignified arrival sequence framed by pitched gables, hand-laid stone piers, and tailored landscape architecture built to endure for generations.",
   },
   {
     id: "14",
@@ -180,13 +249,20 @@ const GALLERY: readonly GalleryItem[] = [
     cls: "md:col-span-5 md:row-span-2",
     w: 1600,
     h: 1067,
+    location: "Dallas, TX",
+    scope: "Private Lounge & Reception Salon",
+    materials: "Bespoke Built-In Shelving, Stone Mantle & Dimmable Architectural Brass",
+    description:
+      "Intimate evening atmosphere achieved through custom millwork alcoves, warm metallic accents, and balanced illumination tailored for hosting and conversation.",
   },
-] as const;
+] as const satisfies readonly GalleryItem[];
 
 export function GallerySection() {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [showAll, setShowAll] = useState(false);
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const dialogTitleId = useId();
 
   const filteredGallery =
     activeCategory === "All" ? GALLERY : GALLERY.filter((item) => item.category === activeCategory);
@@ -197,9 +273,42 @@ export function GallerySection() {
   const remainingCount = Math.max(0, filteredGallery.length - visibleGallery.length);
 
   useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (lightboxIdx !== null) {
+      if (!dialog.open) {
+        dialog.showModal();
+      }
+    } else if (dialog.open) {
+      dialog.close();
+    }
+  }, [lightboxIdx]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog || "closedBy" in HTMLDialogElement.prototype) return;
+    const outside = (e: PointerEvent) => {
+      const r = dialog.getBoundingClientRect();
+      return e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom;
+    };
+    let pressedOutside = false;
+    const onDown = (e: PointerEvent) => {
+      pressedOutside = outside(e);
+    };
+    const onUp = (e: PointerEvent) => {
+      if (pressedOutside && outside(e)) dialog.close();
+    };
+    dialog.addEventListener("pointerdown", onDown);
+    dialog.addEventListener("pointerup", onUp);
+    return () => {
+      dialog.removeEventListener("pointerdown", onDown);
+      dialog.removeEventListener("pointerup", onUp);
+    };
+  }, []);
+
+  useEffect(() => {
     if (lightboxIdx === null) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setLightboxIdx(null);
       if (e.key === "ArrowRight") {
         setLightboxIdx((prev) => (prev === null ? null : (prev + 1) % filteredGallery.length));
       }
@@ -356,7 +465,7 @@ export function GallerySection() {
                     alt={`${g.title} — ${g.subtitle}`}
                     width={g.w}
                     height={g.h}
-                    loading={i < 4 ? "eager" : "lazy"}
+                    loading="lazy"
                     decoding="async"
                     className="h-full w-full object-cover transition-transform duration-1000 ease-[var(--ease-lux)] group-hover/card:scale-108"
                   />
@@ -455,19 +564,16 @@ export function GallerySection() {
         )}
       </div>
 
-      {/* Fullscreen Architectural Lightbox Modal */}
-      {activeLightboxItem && lightboxIdx !== null && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={activeLightboxItem.title}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-charcoal/95 p-4 backdrop-blur-xl sm:p-8"
-          onClick={() => setLightboxIdx(null)}
-        >
-          <div
-            className="relative flex max-h-[90vh] w-full max-w-6xl flex-col overflow-hidden rounded-[6px] border border-ivory/20 bg-charcoal shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)]"
-            onClick={(e) => e.stopPropagation()}
-          >
+      {/* Fullscreen Native Architectural Lightbox Modal */}
+      <dialog
+        ref={dialogRef}
+        aria-labelledby={dialogTitleId}
+        {...({ closedby: "any" } as Record<string, string>)}
+        onClose={() => setLightboxIdx(null)}
+        className="m-auto max-h-[90vh] w-[calc(100vw-2rem)] max-w-6xl overflow-hidden rounded-[6px] border border-ivory/20 bg-charcoal p-0 text-ivory shadow-[0_40px_100px_-20px_rgba(0,0,0,0.9)] backdrop:bg-charcoal/92 backdrop:backdrop-blur-xl open:flex open:flex-col"
+      >
+        {activeLightboxItem && lightboxIdx !== null && (
+          <>
             {/* Top Bar */}
             <div className="flex items-center justify-between border-b border-ivory/15 bg-charcoal/90 px-5 py-3.5 text-ivory">
               <div className="flex items-center gap-3">
@@ -479,14 +585,16 @@ export function GallerySection() {
                 </span>
               </div>
 
-              <button
-                type="button"
-                onClick={() => setLightboxIdx(null)}
-                aria-label="Close gallery preview"
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-ivory/20 bg-ivory/10 text-ivory transition-colors hover:border-champagne hover:bg-champagne hover:text-charcoal"
-              >
-                <X className="h-4 w-4" />
-              </button>
+              <form method="dialog">
+                <button
+                  type="submit"
+                  autoFocus
+                  aria-label="Close gallery preview"
+                  className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-ivory/20 bg-ivory/10 text-ivory transition-colors hover:border-champagne hover:bg-champagne hover:text-charcoal"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              </form>
             </div>
 
             {/* Image Stage */}
@@ -494,6 +602,8 @@ export function GallerySection() {
               <img
                 src={activeLightboxItem.img}
                 alt={activeLightboxItem.title}
+                width={activeLightboxItem.w}
+                height={activeLightboxItem.h}
                 className="max-h-[70vh] w-full object-contain"
               />
 
@@ -506,7 +616,7 @@ export function GallerySection() {
                     (lightboxIdx - 1 + filteredGallery.length) % filteredGallery.length,
                   )
                 }
-                className="absolute left-4 flex h-11 w-11 items-center justify-center rounded-full border border-ivory/25 bg-charcoal/85 text-ivory backdrop-blur-md transition-all hover:border-champagne hover:bg-champagne hover:text-charcoal"
+                className="absolute left-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-ivory/25 bg-charcoal/85 text-ivory backdrop-blur-md transition-all hover:border-champagne hover:bg-champagne hover:text-charcoal"
               >
                 <ArrowLeft className="h-5 w-5" />
               </button>
@@ -515,7 +625,7 @@ export function GallerySection() {
                 type="button"
                 aria-label="Next image"
                 onClick={() => setLightboxIdx((lightboxIdx + 1) % filteredGallery.length)}
-                className="absolute right-4 flex h-11 w-11 items-center justify-center rounded-full border border-ivory/25 bg-charcoal/85 text-ivory backdrop-blur-md transition-all hover:border-champagne hover:bg-champagne hover:text-charcoal"
+                className="absolute right-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-ivory/25 bg-charcoal/85 text-ivory backdrop-blur-md transition-all hover:border-champagne hover:bg-champagne hover:text-charcoal"
               >
                 <ArrowRight className="h-5 w-5" />
               </button>
@@ -524,7 +634,10 @@ export function GallerySection() {
             {/* Bottom Caption Bar */}
             <div className="flex flex-col justify-between gap-4 border-t border-ivory/15 bg-charcoal/95 px-6 py-4 text-ivory sm:flex-row sm:items-center">
               <div>
-                <h3 className="font-serif text-xl font-bold text-champagne sm:text-2xl">
+                <h3
+                  id={dialogTitleId}
+                  className="font-serif text-xl font-bold text-champagne sm:text-2xl"
+                >
                   {activeLightboxItem.title}
                 </h3>
                 <p className="mt-0.5 font-sans text-sm text-ivory/80">
@@ -532,9 +645,9 @@ export function GallerySection() {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </>
+        )}
+      </dialog>
     </section>
   );
 }
