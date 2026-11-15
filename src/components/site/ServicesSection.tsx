@@ -83,6 +83,16 @@ export function ServicesSection() {
                 <p className="mt-2 font-sans text-[0.96875rem] leading-[1.75] text-[#45443F]">
                   Every commission is guided from vision to completion by the same team.
                 </p>
+                <div className="mt-4">
+                  <Link
+                    to="/services"
+                    hash=""
+                    className="group/all inline-flex items-center gap-2 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-[#6B593B] transition-colors hover:text-charcoal"
+                  >
+                    <span>View All Services</span>
+                    <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/all:translate-x-0.5 group-hover/all:-translate-y-0.5" />
+                  </Link>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -138,8 +148,10 @@ export function ServicesSection() {
                       className="animate-welcome-frame pointer-events-none absolute -inset-2 rounded-[6px] border border-[#9B8766]/40 bg-cream/65 transition-transform duration-700 ease-[var(--ease-lux)] group-hover/card:-translate-x-1.5 group-hover/card:-translate-y-1.5"
                     />
 
-                    <div
-                      className="relative z-10 block overflow-hidden rounded-[6px] bg-cream shadow-[0_18px_40px_-16px_oklch(0.18_0.006_120/0.3)] ring-1 ring-charcoal/12"
+                    <Link
+                      to="/services"
+                      hash={s.id}
+                      className="relative z-10 block overflow-hidden rounded-[6px] bg-cream shadow-[0_18px_40px_-16px_oklch(0.18_0.006_120/0.3)] ring-1 ring-charcoal/12 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6B593B]"
                       aria-label={s.title}
                     >
                       <img
@@ -180,7 +192,7 @@ export function ServicesSection() {
                       >
                         <ArrowUpRight className="h-4 w-4 transition-transform duration-500 ease-[var(--ease-lux)] group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5" />
                       </span>
-                    </div>
+                    </Link>
                   </div>
                 </div>
 

@@ -22,7 +22,7 @@ const OUR_SERVICES = [
   {
     label: "Design Consultation – Architectural",
     to: "/services",
-    hash: "architectural-design-consultation",
+    hash: "design-consultation",
   },
   {
     label: "Interior Finish Out",
@@ -32,7 +32,7 @@ const OUR_SERVICES = [
   {
     label: "Double Vanity",
     to: "/services",
-    hash: "custom-interior-features",
+    hash: "double-vanity",
   },
 ] as const;
 
@@ -46,27 +46,39 @@ const AREAS_WE_SERVE = [
   "Mansfield TX",
 ] as const;
 
-const SEO_LINKS = [
-  "Custom Home Builder Dallas",
-  "Luxury Home Builder Dallas",
-  "Cost to Build a Custom Home in Dallas",
-  "How to Choose the Right Dallas Custom Home Builder",
-  "Top Design Trends for Dallas Luxury Homes",
-  "Energy-Efficient Features for Luxury Homes",
-  "Modern vs. Transitional Styles in Dallas Homes",
-  "Designing the Perfect Master Suite",
-  "High-End Kitchen Design Dallas",
-  "Dallas Luxury Custom Homes",
-  "Custom Home Design Dallas",
-  "Home Building Process Dallas",
-  "Build on Your Lot Dallas",
-  "Build On Your Lot Home Builder",
-  "Custom Home Builder in Texas",
-  "Custom Homes in DFW",
-  "Custom Homes in North Texas",
-  "Luxury Custom Homes in Dallas TX",
-  "Modern Custom Homes in Texas",
-  "Residential Architect Services in Texas",
+const SEO_LINKS: readonly {
+  label: string;
+  to: "/our-homes" | "/services" | "/projects" | "/blogs" | "/contact" | "/about";
+  hash?: string;
+}[] = [
+  { label: "Custom Home Builder Dallas", to: "/our-homes" },
+  { label: "Luxury Home Builder Dallas", to: "/our-homes" },
+  { label: "Cost to Build a Custom Home in Dallas", to: "/contact" },
+  { label: "How to Choose the Right Dallas Custom Home Builder", to: "/blogs" },
+  { label: "Top Design Trends for Dallas Luxury Homes", to: "/blogs" },
+  {
+    label: "Energy-Efficient Features for Luxury Homes",
+    to: "/services",
+    hash: "complete-home-construction",
+  },
+  { label: "Modern vs. Transitional Styles in Dallas Homes", to: "/our-homes" },
+  { label: "Designing the Perfect Master Suite", to: "/services", hash: "double-vanity" },
+  { label: "High-End Kitchen Design Dallas", to: "/projects" },
+  { label: "Dallas Luxury Custom Homes", to: "/our-homes" },
+  { label: "Custom Home Design Dallas", to: "/services", hash: "design-consultation" },
+  { label: "Home Building Process Dallas", to: "/about" },
+  { label: "Build on Your Lot Dallas", to: "/services", hash: "complete-home-construction" },
+  { label: "Build On Your Lot Home Builder", to: "/services", hash: "complete-home-construction" },
+  { label: "Custom Home Builder in Texas", to: "/our-homes" },
+  { label: "Custom Homes in DFW", to: "/our-homes" },
+  { label: "Custom Homes in North Texas", to: "/about", hash: "areas-we-serve" },
+  { label: "Luxury Custom Homes in Dallas TX", to: "/projects" },
+  { label: "Modern Custom Homes in Texas", to: "/our-homes", hash: "style-03" },
+  {
+    label: "Residential Architect Services in Texas",
+    to: "/services",
+    hash: "design-consultation",
+  },
 ] as const;
 
 export function Footer() {
@@ -146,10 +158,14 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               {OUR_SERVICES.map((service) => (
                 <li key={service.label}>
-                  <span className="group inline-flex items-start gap-2 font-sans text-[0.9rem] leading-snug text-ivory/80">
-                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-champagne/50" />
+                  <Link
+                    to={service.to}
+                    hash={service.hash}
+                    className="group inline-flex items-start gap-2 font-sans text-[0.9rem] leading-snug text-ivory/80 transition-colors duration-200 hover:text-champagne"
+                  >
+                    <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-champagne/50 group-hover:bg-champagne" />
                     <span>{service.label}</span>
-                  </span>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -161,10 +177,14 @@ export function Footer() {
             <ul className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3">
               {AREAS_WE_SERVE.map((area) => (
                 <li key={area}>
-                  <span className="group inline-flex items-center gap-1.5 font-sans text-[0.88rem] text-ivory/80">
-                    <MapPin className="h-3.5 w-3.5 shrink-0 text-champagne/75" />
+                  <Link
+                    to="/about"
+                    hash="areas-we-serve"
+                    className="group inline-flex items-center gap-1.5 font-sans text-[0.88rem] text-ivory/80 transition-colors duration-200 hover:text-champagne"
+                  >
+                    <MapPin className="h-3.5 w-3.5 shrink-0 text-champagne/75 group-hover:text-champagne" />
                     <span>{area}</span>
-                  </span>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -180,28 +200,43 @@ export function Footer() {
             <FooterHeading>Contact</FooterHeading>
             <ul className="mt-5 space-y-3.5 font-sans text-[0.9rem] text-ivory/85">
               <li>
-                <span className="group inline-flex items-center gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-ivory/15 bg-ivory/[0.05] text-champagne">
+                <a
+                  href={`mailto:${BUSINESS.email}`}
+                  className="group inline-flex items-center gap-3 transition-colors duration-200 hover:text-champagne"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-ivory/15 bg-ivory/[0.05] text-champagne transition-colors group-hover:border-champagne/60">
                     <Mail className="h-3.5 w-3.5" />
                   </span>
                   <span className="break-all">{BUSINESS.email}</span>
-                </span>
+                </a>
               </li>
               <li>
-                <span className="group inline-flex items-center gap-3">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-ivory/15 bg-ivory/[0.05] text-champagne">
+                <a
+                  href={BUSINESS.phoneHref}
+                  className="group inline-flex items-center gap-3 transition-colors duration-200 hover:text-champagne"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-ivory/15 bg-ivory/[0.05] text-champagne transition-colors group-hover:border-champagne/60">
                     <Phone className="h-3.5 w-3.5" />
                   </span>
-                  <span className="font-semibold text-ivory">{BUSINESS.phone}</span>
-                </span>
+                  <span className="font-semibold text-ivory group-hover:text-champagne">
+                    {BUSINESS.phone}
+                  </span>
+                </a>
               </li>
-              <li className="inline-flex items-start gap-3 text-ivory/80">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-ivory/15 bg-ivory/[0.05] text-champagne">
-                  <MapPin className="h-3.5 w-3.5" />
-                </span>
-                <span className="pt-1">
-                  {BUSINESS.street}, {BUSINESS.city}, {BUSINESS.region} {BUSINESS.postal}
-                </span>
+              <li>
+                <a
+                  href="https://maps.google.com/?q=10830+N.+Central+Expressway+Ste.130+Dallas,+TX+75231"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex items-start gap-3 text-ivory/80 transition-colors duration-200 hover:text-champagne"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] border border-ivory/15 bg-ivory/[0.05] text-champagne transition-colors group-hover:border-champagne/60">
+                    <MapPin className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="pt-1">
+                    {BUSINESS.street}, {BUSINESS.city}, {BUSINESS.region} {BUSINESS.postal}
+                  </span>
+                </a>
               </li>
             </ul>
           </div>
@@ -317,12 +352,14 @@ export function Footer() {
         <div className="border-b border-ivory/12 py-8">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5">
             {SEO_LINKS.map((topic) => (
-              <span
-                key={topic}
-                className="font-sans text-[0.78rem] text-ivory/65 underline decoration-ivory/25 underline-offset-4 transition-colors duration-300 hover:text-champagne hover:decoration-champagne cursor-default"
+              <Link
+                key={topic.label}
+                to={topic.to}
+                {...(topic.hash ? { hash: topic.hash } : {})}
+                className="font-sans text-[0.78rem] text-ivory/65 underline decoration-ivory/25 underline-offset-4 transition-colors duration-300 hover:text-champagne hover:decoration-champagne"
               >
-                {topic}
-              </span>
+                {topic.label}
+              </Link>
             ))}
           </div>
         </div>

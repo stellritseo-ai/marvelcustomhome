@@ -74,7 +74,10 @@ export function AboutAreas() {
   const activeCommunity = COMMUNITIES[selectedIdx] ?? COMMUNITIES[0];
 
   return (
-    <section className="relative overflow-x-clip bg-ivory py-[70px] sm:py-[90px]">
+    <section
+      id="areas-we-serve"
+      className="relative scroll-mt-28 overflow-x-clip bg-ivory py-[70px] sm:py-[90px]"
+    >
       <div className="container-lux">
         {/* Top Editorial Split Header */}
         <div className="grid gap-8 border-b border-[#9B8766]/25 pb-10 lg:grid-cols-12 lg:items-end lg:gap-12 lg:pb-12">

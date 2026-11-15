@@ -816,6 +816,18 @@ export function ServicesDedicatedShowcase() {
                       ))}
                     </ul>
                   </div>
+
+                  <div className="mt-5">
+                    <Link
+                      to="/services"
+                      hash={activeService.id}
+                      onClick={() => setLightboxState(null)}
+                      className="group/exp inline-flex w-full items-center justify-center gap-2 rounded-[50px] border border-champagne/70 bg-ivory/[0.06] px-4 py-2.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-champagne transition-all hover:border-champagne hover:bg-champagne hover:text-charcoal"
+                    >
+                      <span>Explore Dedicated Page</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/exp:translate-x-0.5 group-hover/exp:-translate-y-0.5" />
+                    </Link>
+                  </div>
                 </div>
 
                 {/* 3-Plate Thumbnail Strip */}

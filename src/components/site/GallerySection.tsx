@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Expand, Sparkles, X } from "lucide-react";
 import b1 from "@/assets/b1.jpg";
 import b2 from "@/assets/b2.png";
@@ -367,8 +368,8 @@ export function GallerySection() {
                 </p>
 
                 <div>
-                  <button
-                    type="button"
+                  <Link
+                    to="/projects"
                     className="group/btn relative inline-flex cursor-pointer items-center gap-3 overflow-hidden rounded-[50px] border border-[#9B8766]/50 bg-charcoal px-6 py-3 font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-ivory shadow-[0_12px_28px_-10px_rgba(28,28,28,0.45)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-0.5 hover:border-[#9B8766] hover:bg-gradient-to-r hover:from-[#9B8766] hover:via-[#b89f74] hover:to-[#9B8766] hover:shadow-[0_18px_36px_-10px_rgba(155,135,102,0.5)]"
                   >
                     <span
@@ -382,7 +383,7 @@ export function GallerySection() {
                     >
                       <ArrowUpRight className="h-3.5 w-3.5" />
                     </span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -644,6 +645,14 @@ export function GallerySection() {
                   {activeLightboxItem.subtitle}
                 </p>
               </div>
+              <Link
+                to="/contact"
+                onClick={() => setLightboxIdx(null)}
+                className="group/inq inline-flex shrink-0 items-center gap-2 self-start rounded-[50px] border border-champagne/60 bg-ivory/[0.06] px-4 py-2 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-champagne transition-all hover:border-champagne hover:bg-champagne hover:text-charcoal sm:self-center"
+              >
+                <span>Inquire About This Space</span>
+                <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/inq:translate-x-0.5 group-hover/inq:-translate-y-0.5" />
+              </Link>
             </div>
           </>
         )}

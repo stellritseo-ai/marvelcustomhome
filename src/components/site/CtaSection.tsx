@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import outdoor from "@/assets/outdoor.jpg";
 import { Parallax, Reveal } from "./Reveal";
@@ -73,8 +74,9 @@ export function CtaSection() {
         {/* Centered Premium Pill CTA Button */}
         <Reveal delay={320}>
           <div className="mt-10">
-            <button
-              type="button"
+            <Link
+              to="/contact"
+              hash="contact"
               className="group/btn relative inline-flex cursor-pointer items-center gap-4 overflow-hidden rounded-[50px] border border-champagne/80 bg-gradient-to-r from-[#9B8766] via-[#b89f74] to-[#9B8766] px-8 py-4 font-sans text-[0.76rem] font-semibold uppercase tracking-[0.22em] text-ivory shadow-[0_20px_48px_-10px_rgba(0,0,0,0.7)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-1 hover:border-ivory hover:shadow-[0_26px_56px_-8px_rgba(155,135,102,0.65)]"
             >
               <span
@@ -88,7 +90,7 @@ export function CtaSection() {
               >
                 <ArrowUpRight className="h-4 w-4" />
               </span>
-            </button>
+            </Link>
           </div>
         </Reveal>
       </div>

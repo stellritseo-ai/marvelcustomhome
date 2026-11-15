@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import welcome1 from "@/assets/welcome1.png";
 import welcome2 from "@/assets/welcome2.png";
@@ -156,8 +157,8 @@ export function WelcomeSection() {
 
             <Reveal delay={260}>
               <div className="mt-8">
-                <button
-                  type="button"
+                <Link
+                  to="/about"
                   className="group relative inline-flex min-h-12 cursor-pointer items-center gap-4 overflow-hidden rounded-[50px] bg-charcoal py-2 pr-2 pl-7 font-sans text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-ivory shadow-[0_14px_30px_-10px_oklch(0.18_0.006_120/0.4)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-0.5 hover:bg-[#171817] hover:shadow-[0_18px_38px_-10px_oklch(0.18_0.006_120/0.55)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6B593B]"
                 >
                   <span
@@ -171,7 +172,7 @@ export function WelcomeSection() {
                   >
                     <ArrowRight className="h-4 w-4" />
                   </span>
-                </button>
+                </Link>
               </div>
             </Reveal>
           </div>

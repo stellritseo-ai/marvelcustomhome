@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CheckCircle2, Compass, Layers, Sparkles } from "lucide-react";
 import b1 from "@/assets/b1.jpg";
 import b4 from "@/assets/b4.png";
@@ -41,6 +42,8 @@ const SIGNATURE_PROJECTS = [
     img: interiorFinishOut,
     w: 1600,
     h: 1067,
+    to: "/services" as const,
+    hash: "interior-finish-out",
   },
   {
     id: "03",
@@ -52,6 +55,8 @@ const SIGNATURE_PROJECTS = [
     img: kitchen,
     w: 1600,
     h: 1104,
+    to: "/projects" as const,
+    hash: "exhibition",
   },
   {
     id: "04",
@@ -63,6 +68,8 @@ const SIGNATURE_PROJECTS = [
     img: b4,
     w: 1920,
     h: 1080,
+    to: "/our-homes" as const,
+    hash: "style-03",
   },
 ] as const;
 
@@ -109,8 +116,8 @@ export function PortfolioSection() {
                 </p>
 
                 <div>
-                  <button
-                    type="button"
+                  <Link
+                    to="/projects"
                     className="group/btn relative inline-flex cursor-pointer items-center gap-3 overflow-hidden rounded-[50px] border border-[#9B8766]/50 bg-charcoal px-6 py-3 font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-ivory shadow-[0_12px_28px_-10px_rgba(28,28,28,0.45)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-0.5 hover:border-[#9B8766] hover:bg-gradient-to-r hover:from-[#9B8766] hover:via-[#b89f74] hover:to-[#9B8766] hover:shadow-[0_18px_36px_-10px_rgba(155,135,102,0.5)]"
                   >
                     <span
@@ -124,7 +131,7 @@ export function PortfolioSection() {
                     >
                       <ArrowUpRight className="h-3.5 w-3.5" />
                     </span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -264,8 +271,9 @@ export function PortfolioSection() {
                 </div>
 
                 <div className="relative z-10 mt-8 border-t border-ivory/15 pt-5">
-                  <button
-                    type="button"
+                  <Link
+                    to="/projects"
+                    hash="exhibition"
                     className="group/btn relative inline-flex cursor-pointer items-center gap-3 overflow-hidden rounded-[50px] border border-champagne/80 bg-gradient-to-r from-[#9B8766] via-[#b89f74] to-[#9B8766] px-6 py-3 font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-ivory shadow-[0_12px_28px_-8px_rgba(0,0,0,0.6)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-0.5 hover:border-ivory hover:shadow-[0_18px_36px_-6px_rgba(155,135,102,0.55)]"
                   >
                     <span
@@ -279,7 +287,7 @@ export function PortfolioSection() {
                     >
                       <ArrowUpRight className="h-3.5 w-3.5" />
                     </span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             </article>
@@ -313,7 +321,12 @@ export function PortfolioSection() {
 
                 <div>
                   {/* Image Frame */}
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-[6px] border border-charcoal/12 bg-charcoal">
+                  <Link
+                    to={p.to}
+                    hash={p.hash}
+                    aria-label={p.title}
+                    className="relative block aspect-[16/10] overflow-hidden rounded-[6px] border border-charcoal/12 bg-charcoal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#9B8766]"
+                  >
                     <img
                       src={p.img}
                       alt={p.title}
@@ -352,12 +365,14 @@ export function PortfolioSection() {
                     >
                       <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5" />
                     </span>
-                  </div>
+                  </Link>
 
                   {/* Card Body */}
                   <div className="relative z-10 mt-5">
                     <h3 className="font-serif text-2xl font-bold leading-snug text-charcoal transition-colors duration-300 group-hover/card:text-[#9B8766]">
-                      {p.title}
+                      <Link to={p.to} hash={p.hash} className="focus-visible:outline-none">
+                        {p.title}
+                      </Link>
                     </h3>
 
                     <p className="mt-2.5 font-sans text-[0.92rem] leading-[1.7] text-charcoal/75">
@@ -387,13 +402,17 @@ export function PortfolioSection() {
                     </div>
                   </div>
 
-                  <div className="mt-4 flex items-center justify-between border-t border-charcoal/10 pt-3.5">
+                  <Link
+                    to={p.to}
+                    hash={p.hash}
+                    className="mt-4 flex items-center justify-between border-t border-charcoal/10 pt-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9B8766]"
+                  >
                     <span className="inline-flex items-center gap-1.5 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-charcoal group-hover/card:text-[#9B8766]">
                       <Layers className="h-3.5 w-3.5 text-[#9B8766]" />
                       <span>Project Dossier</span>
                     </span>
                     <ArrowUpRight className="h-4 w-4 text-[#9B8766] transition-transform duration-300 group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5" />
-                  </div>
+                  </Link>
                 </div>
               </div>
             </Reveal>

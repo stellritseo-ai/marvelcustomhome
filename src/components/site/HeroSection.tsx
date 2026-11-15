@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { useEffect, useState } from "react";
 import b1 from "@/assets/b1.jpg";
@@ -107,7 +108,7 @@ export function HeroSection() {
                 alt={slide.alt}
                 width={slide.width}
                 height={slide.height}
-                fetchPriority={idx === 0 ? "high" : "low"}
+                fetchPriority={idx === 0 ? "high" : undefined}
                 decoding={idx === 0 ? "sync" : "async"}
                 className={`hero-slide-img h-full w-full object-cover ${slide.objectClass} ${slide.kenClass} ${stateClass} ${pausedClass}`}
               />
@@ -166,8 +167,8 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-wrap items-center justify-between gap-4 sm:gap-7 lg:justify-end">
-              <button
-                type="button"
+              <Link
+                to="/contact"
                 className="eyebrow group inline-flex min-h-12 cursor-pointer items-center gap-3 rounded-[4px] border border-ivory bg-ivory px-5 py-3 text-[0.7rem] font-semibold text-charcoal transition-all duration-500 ease-[var(--ease-lux)] hover:border-champagne hover:bg-champagne focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-champagne sm:gap-4 sm:px-7 sm:py-3.5 sm:text-xs"
               >
                 <span>CUSTOM YOUR HOME NOW</span>
@@ -175,7 +176,7 @@ export function HeroSection() {
                   aria-hidden="true"
                   className="h-4 w-4 shrink-0 transition-transform duration-500 ease-[var(--ease-lux)] group-hover:translate-x-1"
                 />
-              </button>
+              </Link>
 
               <div
                 className="inline-flex items-center gap-1 rounded-[50px] border border-ivory/20 bg-graphite/55 p-1.5 backdrop-blur-md"

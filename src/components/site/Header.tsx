@@ -74,7 +74,8 @@ export function Header() {
       path === "/projects" ||
       path === "/our-homes" ||
       path === "/blogs" ||
-      path === "/contact") &&
+      path === "/contact" ||
+      path === "/inspiration") &&
     !scrolled;
 
   function positionServicesPopover() {
@@ -539,22 +540,24 @@ export function Header() {
                 <p className="mt-1 leading-relaxed">
                   {BUSINESS.street} · {BUSINESS.city}, {BUSINESS.region} {BUSINESS.postal}
                 </p>
-                <span
-                  className={`mt-1 inline-block font-medium ${
+                <a
+                  href={BUSINESS.phoneHref}
+                  className={`mt-1 inline-block font-medium transition-colors hover:text-champagne ${
                     overHero ? "text-ivory" : "text-charcoal"
                   }`}
                 >
                   {BUSINESS.phone}
-                </span>
+                </a>
               </li>
             </ul>
           </nav>
 
-          <div
-            className={`header-phone-btn group inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-[50px] border px-3 py-2 text-[0.8125rem] font-medium tracking-[0.04em] whitespace-nowrap sm:px-4 ${focusOutline} ${
+          <a
+            href={BUSINESS.phoneHref}
+            className={`header-phone-btn group inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-[50px] border px-3 py-2 text-[0.8125rem] font-medium tracking-[0.04em] whitespace-nowrap transition-colors duration-300 sm:px-4 ${focusOutline} ${
               overHero
-                ? "border-ivory/35 bg-ivory/14 text-ivory"
-                : "border-charcoal bg-charcoal text-ivory"
+                ? "border-ivory/35 bg-ivory/14 text-ivory hover:border-champagne hover:bg-ivory/20"
+                : "border-charcoal bg-charcoal text-ivory hover:border-[#6B593B] hover:bg-[#171817]"
             }`}
           >
             <Phone
@@ -563,7 +566,7 @@ export function Header() {
             />
             <span className="sr-only">Call </span>
             <span className="header-phone-text">{BUSINESS.phone}</span>
-          </div>
+          </a>
         </div>
       </div>
     </header>

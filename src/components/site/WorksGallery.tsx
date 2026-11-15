@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   ArrowLeft,
   ArrowRight,
@@ -560,6 +561,17 @@ export function WorksGallery() {
                       </dd>
                     </div>
                   </dl>
+
+                  <div className="mt-5">
+                    <Link
+                      to="/contact"
+                      onClick={() => setLightboxIdx(null)}
+                      className="group/inq inline-flex w-full items-center justify-center gap-2 rounded-[50px] border border-champagne/70 bg-ivory/[0.06] px-4 py-2.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-champagne transition-all hover:border-champagne hover:bg-champagne hover:text-charcoal"
+                    >
+                      <span>Request Private Consultation</span>
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/inq:translate-x-0.5 group-hover/inq:-translate-y-0.5" />
+                    </Link>
+                  </div>
                 </div>
 
                 {/* Filmstrip Thumbnail Selector */}

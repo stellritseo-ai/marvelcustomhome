@@ -1,5 +1,14 @@
 import { useState } from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, Compass, MapPin, Sparkles } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ArrowUpRight,
+  CheckCircle2,
+  Compass,
+  MapPin,
+  Sparkles,
+} from "lucide-react";
 import processBg from "@/assets/processbg.jpg";
 import { Eyebrow } from "./Eyebrow";
 import { GALLERY } from "./GallerySection";
@@ -335,23 +344,34 @@ export function WorksSpotlight() {
                 </div>
               </div>
 
-              <div className="relative z-10 mt-8 flex items-center justify-between border-t border-ivory/12 pt-4">
-                <span className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-ivory/55">
-                  Study {activeIdx + 1} of {CASE_STUDIES.length}
-                </span>
-                <div className="flex items-center gap-1.5">
-                  {CASE_STUDIES.map((s, idx) => (
-                    <button
-                      key={s.id}
-                      type="button"
-                      onClick={() => setActiveIdx(idx)}
-                      aria-label={`Select case study ${s.id}`}
-                      className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${
-                        idx === activeIdx ? "w-7 bg-champagne" : "w-2 bg-ivory/25 hover:bg-ivory/50"
-                      }`}
-                    />
-                  ))}
+              <div className="relative z-10 mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-ivory/12 pt-4">
+                <div className="flex items-center gap-3">
+                  <span className="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-ivory/55">
+                    Study {activeIdx + 1} of {CASE_STUDIES.length}
+                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {CASE_STUDIES.map((s, idx) => (
+                      <button
+                        key={s.id}
+                        type="button"
+                        onClick={() => setActiveIdx(idx)}
+                        aria-label={`Select case study ${s.id}`}
+                        className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${
+                          idx === activeIdx
+                            ? "w-7 bg-champagne"
+                            : "w-2 bg-ivory/25 hover:bg-ivory/50"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
+                <Link
+                  to="/contact"
+                  className="group/cta inline-flex items-center gap-2 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-champagne transition-colors hover:text-ivory"
+                >
+                  <span>Inquire About Commission</span>
+                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+                </Link>
               </div>
             </div>
           </div>

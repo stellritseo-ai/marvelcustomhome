@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, CheckCircle2, Layers, Sparkles } from "lucide-react";
 import b1 from "@/assets/b1.jpg";
 import bathroom from "@/assets/bathroom.jpg";
@@ -26,7 +27,8 @@ interface CollectionItem {
   materialTitle: string;
   materialSummary: string;
   ctaText: string;
-  ctaTo: "/inspiration" | "/contact";
+  ctaTo: "/projects" | "/services" | "/our-homes" | "/contact";
+  ctaHash?: string;
 }
 
 const COLLECTIONS: readonly CollectionItem[] = [
@@ -50,7 +52,7 @@ const COLLECTIONS: readonly CollectionItem[] = [
     materialTitle: "Monolithic Stone & Millwork",
     materialSummary: "Hand-selected Italian slabs paired with furniture-grade joinery.",
     ctaText: "Explore Kitchens",
-    ctaTo: "/inspiration",
+    ctaTo: "/projects",
   },
   {
     n: "02",
@@ -72,7 +74,8 @@ const COLLECTIONS: readonly CollectionItem[] = [
     materialTitle: "Honed Travertine & Bronze",
     materialSummary: "Warm natural stone textures balanced with unlacquered brass fixtures.",
     ctaText: "Explore Bathrooms",
-    ctaTo: "/inspiration",
+    ctaTo: "/services",
+    ctaHash: "double-vanity",
   },
   {
     n: "03",
@@ -94,7 +97,7 @@ const COLLECTIONS: readonly CollectionItem[] = [
     materialTitle: "Indiana Limestone & Steel",
     materialSummary: "Enduring masonry envelopes crafted for multi-generational presence.",
     ctaText: "Commission Your Home",
-    ctaTo: "/contact",
+    ctaTo: "/our-homes",
   },
 ] as const;
 
@@ -350,8 +353,9 @@ export function CollectionsSection() {
                                 ))}
                               </div>
 
-                              <button
-                                type="button"
+                              <Link
+                                to={col.ctaTo}
+                                {...(col.ctaHash ? { hash: col.ctaHash } : {})}
                                 onClick={(e) => e.stopPropagation()}
                                 className="group/btn relative inline-flex shrink-0 cursor-pointer items-center gap-3 self-start overflow-hidden rounded-[50px] border border-champagne/80 bg-gradient-to-r from-[#9B8766] via-[#b89f74] to-[#9B8766] px-5 py-2.5 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-ivory shadow-[0_12px_28px_-8px_rgba(0,0,0,0.6)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-0.5 hover:border-ivory hover:shadow-[0_16px_36px_-6px_rgba(155,135,102,0.55)] sm:self-auto"
                               >
@@ -366,7 +370,7 @@ export function CollectionsSection() {
                                 >
                                   <ArrowUpRight className="h-3 w-3" />
                                 </span>
-                              </button>
+                              </Link>
                             </div>
                           </div>
                         </div>

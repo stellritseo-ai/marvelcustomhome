@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight, CheckCircle2, Sparkles } from "lucide-react";
 import processBuild from "@/assets/process-build.jpg";
 import processCustomize from "@/assets/process-customize.jpg";
@@ -372,8 +373,8 @@ export function ProcessSection() {
                           </p>
                         </div>
 
-                        <button
-                          type="button"
+                        <Link
+                          to="/contact"
                           className="group/btn relative inline-flex shrink-0 cursor-pointer items-center gap-3 self-start overflow-hidden rounded-[50px] border border-champagne/80 bg-gradient-to-r from-[#9B8766] via-[#b89f74] to-[#9B8766] px-6 py-3 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-ivory shadow-[0_12px_28px_-8px_rgba(0,0,0,0.6)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-0.5 hover:border-ivory hover:shadow-[0_16px_36px_-6px_rgba(155,135,102,0.55)] sm:self-end"
                         >
                           <span
@@ -387,7 +388,7 @@ export function ProcessSection() {
                           >
                             <ArrowUpRight className="h-3.5 w-3.5" />
                           </span>
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
