@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import { BUSINESS } from "@/lib/site";
 import { Logo } from "./Logo";
 
 const QUICK_LINKS = [
+  { label: "About Us", to: "/about" },
   { label: "Services", to: "/services" },
   { label: "Our Works", to: "/projects" },
-  { label: "Our Homes", to: "/inspiration" },
-  { label: "Blogs", to: "/inspiration" },
+  { label: "Our Homes", to: "/our-homes" },
+  { label: "Blogs", to: "/blogs" },
   { label: "Contact Us", to: "/contact" },
 ] as const;
 
@@ -103,9 +105,13 @@ export function Footer() {
         <div className="grid gap-10 border-b border-ivory/12 pb-12 lg:grid-cols-12 lg:gap-8">
           {/* Col 1: Brand & Description (4 Cols) */}
           <div className="lg:col-span-4 lg:pr-6">
-            <div className="inline-block" aria-label="Marvel Custom Homes">
+            <Link
+              to="/"
+              className="inline-block focus-visible:outline-none"
+              aria-label="Marvel Custom Homes"
+            >
               <Logo tone="light" className="h-16 sm:h-20" />
-            </div>
+            </Link>
             <p className="mt-5 max-w-sm font-sans text-[0.92rem] leading-[1.75] text-ivory/75">
               Staying connected and operating efficiently are essential for any business, especially
               those that operate primarily online.
@@ -122,10 +128,13 @@ export function Footer() {
             <ul className="mt-5 space-y-3">
               {QUICK_LINKS.map((item) => (
                 <li key={item.label}>
-                  <span className="group inline-flex items-center gap-1.5 font-sans text-[0.9rem] text-ivory/80">
-                    <span className="h-1 w-1 rounded-full bg-champagne/50" />
+                  <Link
+                    to={item.to}
+                    className="group inline-flex items-center gap-1.5 font-sans text-[0.9rem] text-ivory/80 transition-colors duration-200 hover:text-champagne"
+                  >
+                    <span className="h-1 w-1 rounded-full bg-champagne/50 group-hover:bg-champagne" />
                     <span>{item.label}</span>
-                  </span>
+                  </Link>
                 </li>
               ))}
             </ul>

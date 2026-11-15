@@ -1,35 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { AboutAreas } from "@/components/site/AboutAreas";
+import { AboutHero } from "@/components/site/AboutHero";
+import { AboutProcess } from "@/components/site/AboutProcess";
+import { AboutStory } from "@/components/site/AboutStory";
 import { CtaSection } from "@/components/site/CtaSection";
-import { PageHeader } from "@/components/site/PageHeader";
-import { ProcessSection } from "@/components/site/ProcessSection";
-import { WelcomeSection } from "@/components/site/WelcomeSection";
-import { WhySection } from "@/components/site/WhySection";
-import { IMAGES } from "@/lib/images";
-import { pageHead } from "@/lib/site";
+import { localBusinessJsonLd, pageHead } from "@/lib/site";
 
 export const Route = createFileRoute("/about")({
-  head: () =>
-    pageHead(
-      "About | Marvel Custom Homes, Dallas",
-      "The philosophy and process behind Marvel Custom Homes — custom residences built with precision, creativity and craftsmanship.",
+  head: () => ({
+    ...pageHead(
+      "About Us | Crafting Excellence in Every Structure — Marvel Custom Homes",
+      "Marvel Custom Homes is committed to building superior custom homes and commercial spaces across Dallas-Fort Worth that reflect the highest standards of craftsmanship, durability, and design.",
     ),
-  component: () => (
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusinessJsonLd) }],
+  }),
+  component: AboutPage,
+});
+
+function AboutPage() {
+  return (
     <>
-      <PageHeader
-        eyebrow="About Marvel"
-        title={
-          <>
-            A Home Should Be a <em className="italic">Reflection.</em>
-          </>
-        }
-        intro="Of your lifestyle, individuality and vision — brought together from architectural planning to the finest interior detail."
-        img={IMAGES.exterior}
-        alt="Limestone and white brick custom residence"
-      />
-      <WelcomeSection />
-      <ProcessSection />
-      <WhySection />
+      <AboutHero />
+      <AboutStory />
+      <AboutProcess />
+      <AboutAreas />
       <CtaSection />
     </>
-  ),
-});
+  );
+}

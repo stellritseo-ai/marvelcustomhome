@@ -1,4 +1,4 @@
-import { useRouterState } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Phone } from "lucide-react";
 import { useEffect, useRef, useState, type ToggleEvent as ReactToggleEvent } from "react";
 import { BUSINESS, HEADER_NAV } from "@/lib/site";
@@ -295,12 +295,17 @@ export function Header() {
     <header ref={headerRef} className={`site-header${isWide ? " is-wide" : ""}`}>
       <div ref={barRef} className="header-bar" data-tone={overHero ? "dark" : "light"}>
         <div ref={innerRef} className="header-inner">
-          <div className="site-logo shrink-0 cursor-default" aria-label="Marvel Custom Homes">
+          <Link
+            to="/"
+            onClick={closeAllMenus}
+            className="site-logo shrink-0 focus-visible:outline-none"
+            aria-label="Marvel Custom Homes"
+          >
             <Logo
               tone={overHero ? "light" : "dark"}
               className="h-11 transition-[height] duration-500 ease-[var(--ease-lux)] sm:h-12 lg:h-[52px]"
             />
-          </div>
+          </Link>
 
           <nav className="site-nav" aria-label="Primary">
             <button
@@ -389,8 +394,9 @@ export function Header() {
                           const isCurrentSub = path === "/services" && hash === sub.hash;
                           return (
                             <li key={sub.hash} className="dropdown-item">
-                              <button
-                                type="button"
+                              <Link
+                                to={sub.to}
+                                hash={sub.hash}
                                 onClick={closeAllMenus}
                                 className={`group flex w-full min-h-11 cursor-pointer items-center justify-between gap-4 rounded-[6px] px-3 py-2.5 text-left transition-all duration-200 ${focusOutline} ${
                                   overHero
@@ -432,7 +438,7 @@ export function Header() {
                                 >
                                   <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                 </span>
-                              </button>
+                              </Link>
                             </li>
                           );
                         })}
@@ -441,13 +447,15 @@ export function Header() {
                   );
                 }
 
+                const isCurrent = path === item.to;
                 return (
                   <li key={item.to}>
-                    <button
-                      type="button"
+                    <Link
+                      to={item.to}
                       onClick={closeAllMenus}
+                      data-active={isCurrent || undefined}
                       className={`nav-top-control group cursor-pointer ${
-                        item.to === "/" ? "font-semibold opacity-100" : ""
+                        isCurrent ? "font-semibold opacity-100" : ""
                       } ${topLinkTone} ${focusOutline}`}
                     >
                       <span className="inline-flex items-baseline gap-3">
@@ -460,10 +468,10 @@ export function Header() {
                       <span
                         aria-hidden="true"
                         className={`nav-rule pointer-events-none absolute inset-x-0 bottom-0.5 h-[1.5px] origin-left scale-x-0 transition-transform duration-500 ease-[var(--ease-lux)] group-hover:scale-x-100 group-focus-visible:scale-x-100 ${
-                          item.to === "/" ? "scale-x-100" : ""
+                          isCurrent ? "scale-x-100" : ""
                         } ${activeRuleColor}`}
                       />
-                    </button>
+                    </Link>
                   </li>
                 );
               })}
