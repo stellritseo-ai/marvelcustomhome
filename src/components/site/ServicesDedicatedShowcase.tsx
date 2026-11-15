@@ -397,7 +397,7 @@ export function ServicesDedicatedShowcase() {
         return (
           <section
             key={service.id}
-            id={service.id}
+            id={`service-0${serviceIdx + 1}`}
             aria-labelledby={`${service.id}-heading`}
             className={`relative scroll-mt-24 overflow-x-clip border-b py-[75px] sm:py-[95px] ${
               isDark ? "border-ivory/12" : "border-charcoal/10"
@@ -559,15 +559,27 @@ export function ServicesDedicatedShowcase() {
                   <Reveal delay={240}>
                     <div className="mt-8 flex flex-wrap items-center gap-3.5">
                       <Link
-                        to="/contact"
+                        to="/services"
+                        hash={service.id}
                         className={`group/cta inline-flex min-h-12 items-center gap-3 rounded-[50px] border px-6 py-3 font-sans text-[0.72rem] font-semibold uppercase tracking-[0.2em] transition-all duration-300 hover:-translate-y-0.5 ${
                           isDark
                             ? "border-champagne/80 bg-gradient-to-r from-[#9B8766] via-[#b89f74] to-[#9B8766] text-ivory shadow-[0_14px_34px_-10px_rgba(0,0,0,0.65)]"
                             : "border-charcoal bg-charcoal text-ivory hover:border-[#9B8766] hover:bg-[#9B8766]"
                         }`}
                       >
-                        <span>Request {service.title} Consultation</span>
+                        <span>Explore {service.title} Page</span>
                         <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+                      </Link>
+
+                      <Link
+                        to="/contact"
+                        className={`inline-flex min-h-12 items-center gap-2 rounded-[50px] border px-5 py-3 font-sans text-[0.68rem] font-semibold uppercase tracking-[0.18em] transition-colors ${
+                          isDark
+                            ? "border-ivory/25 bg-ivory/[0.06] text-ivory hover:border-champagne hover:text-champagne"
+                            : "border-charcoal/20 bg-ivory text-charcoal hover:border-[#9B8766] hover:text-[#6B593B]"
+                        }`}
+                      >
+                        <span>Request Consultation</span>
                       </Link>
 
                       <button
@@ -580,7 +592,7 @@ export function ServicesDedicatedShowcase() {
                         }`}
                       >
                         <Expand className="h-3.5 w-3.5" />
-                        <span>Inspect Portfolio Plates</span>
+                        <span>Inspect Plates</span>
                       </button>
                     </div>
                   </Reveal>

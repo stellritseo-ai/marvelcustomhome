@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createFileRoute, useRouterState } from "@tanstack/react-router";
+import { CompleteHomeConstructionPage } from "@/components/site/CompleteHomeConstructionPage";
 import { CtaSection } from "@/components/site/CtaSection";
 import { DesignConsultationPage } from "@/components/site/DesignConsultationPage";
 import { DoubleVanityPage } from "@/components/site/DoubleVanityPage";
@@ -25,6 +26,7 @@ function ServicesPage() {
     select: (s) => s.location.hash.replace(/^#/, ""),
   });
 
+  const isCompleteConstructionPage = hash === "complete-home-construction";
   const isDesignConsultationPage =
     hash === "design-consultation" || hash === "architectural-design-consultation";
   const isInteriorFinishOutPage = hash === "interior-finish-out";
@@ -32,14 +34,25 @@ function ServicesPage() {
 
   useEffect(() => {
     if (
+      !hash ||
+      isCompleteConstructionPage ||
       isDesignConsultationPage ||
       isInteriorFinishOutPage ||
-      isDoubleVanityPage ||
-      hash === "complete-home-construction"
+      isDoubleVanityPage
     ) {
       window.scrollTo({ top: 0, behavior: "instant" });
     }
-  }, [isDesignConsultationPage, isInteriorFinishOutPage, isDoubleVanityPage, hash]);
+  }, [
+    hash,
+    isCompleteConstructionPage,
+    isDesignConsultationPage,
+    isInteriorFinishOutPage,
+    isDoubleVanityPage,
+  ]);
+
+  if (isCompleteConstructionPage) {
+    return <CompleteHomeConstructionPage />;
+  }
 
   if (isDesignConsultationPage) {
     return <DesignConsultationPage />;

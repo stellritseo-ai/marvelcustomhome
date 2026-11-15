@@ -1,4 +1,4 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Phone } from "lucide-react";
 import { useEffect, useRef, useState, type ToggleEvent as ReactToggleEvent } from "react";
 import { BUSINESS, HEADER_NAV } from "@/lib/site";
@@ -43,6 +43,7 @@ function hidePopoverSafely(el: HTMLElement | null) {
 }
 
 export function Header() {
+  const navigate = useNavigate();
   const path = useRouterState({ select: (s) => s.location.pathname });
   const hash = useRouterState({ select: (s) => s.location.hash.replace(/^#/, "") });
 
@@ -279,11 +280,9 @@ export function Header() {
       return;
     }
 
-    if (hoverPreviewRef.current) {
-      // Clicking while hover-previewing pins the native popover open instead of toggling it closed.
-      hoverPreviewRef.current = false;
-      e.preventDefault();
-    }
+    e.preventDefault();
+    closeAllMenus();
+    void navigate({ to: "/services", hash: "" });
   }
 
   const focusOutline = overHero
@@ -398,6 +397,53 @@ export function Header() {
                         onToggle={onServicesToggle}
                         className="dropdown-list liquid-glass-popover"
                       >
+                        <li className="dropdown-item border-b border-current/10 pb-1 mb-1">
+                          <Link
+                            to="/services"
+                            hash=""
+                            onClick={closeAllMenus}
+                            className={`group flex w-full min-h-11 cursor-pointer items-center justify-between gap-4 rounded-[6px] px-3 py-2.5 text-left transition-all duration-200 ${focusOutline} ${
+                              overHero
+                                ? path === "/services" && !hash
+                                  ? "bg-ivory/16 font-medium text-ivory"
+                                  : "text-ivory/88 hover:bg-ivory/10 hover:text-ivory"
+                                : path === "/services" && !hash
+                                  ? "bg-charcoal/[0.09] font-medium text-charcoal"
+                                  : "text-charcoal/88 hover:bg-charcoal/[0.05] hover:text-charcoal"
+                            }`}
+                          >
+                            <span className="flex items-center gap-3">
+                              <span
+                                className={`eyebrow w-5 shrink-0 text-[0.625rem] tabular-nums tracking-[0.18em] ${accentInk}`}
+                              >
+                                ALL
+                              </span>
+                              <span
+                                aria-hidden="true"
+                                className={`h-3.5 w-px shrink-0 transition-colors duration-200 ${
+                                  overHero
+                                    ? "bg-ivory/18 group-hover:bg-champagne/60"
+                                    : "bg-charcoal/15 group-hover:bg-[#6F5D40]/50"
+                                }`}
+                              />
+                              <span className="dropdown-sublink">All Services Overview</span>
+                            </span>
+                            <span
+                              aria-hidden="true"
+                              className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                                overHero
+                                  ? path === "/services" && !hash
+                                    ? "border-champagne/60 bg-champagne/15 text-champagne"
+                                    : "border-ivory/15 text-ivory/55 group-hover:border-champagne/60 group-hover:bg-champagne/15 group-hover:text-champagne"
+                                  : path === "/services" && !hash
+                                    ? "border-[#6F5D40]/45 bg-[#6F5D40]/12 text-[#6F5D40]"
+                                    : "border-charcoal/15 text-charcoal/55 group-hover:border-[#6F5D40]/45 group-hover:bg-[#6F5D40]/10 group-hover:text-[#6F5D40]"
+                              }`}
+                            >
+                              <ArrowUpRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            </span>
+                          </Link>
+                        </li>
                         {item.items.map((sub) => {
                           const isCurrentSub = path === "/services" && hash === sub.hash;
                           return (

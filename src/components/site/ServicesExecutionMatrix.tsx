@@ -94,12 +94,13 @@ export function ServicesExecutionMatrix() {
                     <span className="font-serif text-2xl font-bold italic text-[#6B593B]">
                       {row.num}
                     </span>
-                    <a
-                      href={`#${row.id}`}
+                    <Link
+                      to="/services"
+                      hash={row.id}
                       className="rounded-[50px] border border-[#9B8766]/35 bg-cream px-2.5 py-1 font-sans text-[0.58rem] font-semibold uppercase tracking-[0.18em] text-[#6B593B] transition-colors hover:border-charcoal hover:bg-charcoal hover:text-champagne"
                     >
-                      Review Scope
-                    </a>
+                      Dedicated Page
+                    </Link>
                   </div>
 
                   <h3 className="mt-4 font-serif text-[1.35rem] font-bold leading-snug text-charcoal">
