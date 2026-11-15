@@ -130,11 +130,13 @@ export function ServicesHero() {
       <div className="container-lux relative z-10">
         <div className="grid gap-3.5 rounded-[6px] border border-ivory/15 bg-charcoal/80 p-4 backdrop-blur-md sm:grid-cols-2 sm:p-5 lg:grid-cols-4 lg:gap-4">
           {SERVICE_ANCHORS.map((item) => {
-            const isCurrent = activeHash === item.id;
+            const isCurrent =
+              activeHash === item.id || (!activeHash && item.id === "complete-home-construction");
             return (
-              <a
+              <Link
                 key={item.id}
-                href={`#${item.id}`}
+                to="/services"
+                hash={item.id}
                 className={`group flex items-center justify-between gap-3 rounded-[5px] border px-4 py-3.5 transition-all duration-300 hover:-translate-y-0.5 ${
                   isCurrent
                     ? "border-champagne bg-champagne/15 shadow-[0_14px_30px_-12px_rgba(215,195,154,0.35)]"
@@ -166,7 +168,7 @@ export function ServicesHero() {
                 >
                   <ArrowDownRight className="h-3.5 w-3.5" />
                 </span>
-              </a>
+              </Link>
             );
           })}
         </div>

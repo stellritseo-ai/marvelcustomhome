@@ -309,9 +309,9 @@ export function ServicesDedicatedShowcase() {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const dialogTitleId = useId();
 
-  // Smooth scroll when navigating to /services#complete-home-construction, etc.
+  // Smooth scroll when navigating to /services#interior-finish-out or /services#double-vanity
   useEffect(() => {
-    if (!hash) return;
+    if (!hash || hash === "complete-home-construction") return;
     const target = document.getElementById(hash);
     if (!target) return;
     const raf = requestAnimationFrame(() => {
