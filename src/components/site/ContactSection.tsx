@@ -247,7 +247,7 @@ export function ContactSection({ asPage = false }: { asPage?: boolean }) {
                       name="phone"
                       label="Phone Number"
                       type="tel"
-                      placeholder="(214) 000-0000"
+                      placeholder="(469) 000-0000"
                       error={errors["phone"]}
                       autoComplete="tel"
                     />

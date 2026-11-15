@@ -1,12 +1,12 @@
 export const BUSINESS = {
   name: "Marvel Custom Homes",
-  phone: "(214) 886-7527",
-  phoneHref: "tel:+12148867527",
-  email: "marvel.care@marvelcustomhomes.com",
-  street: "2626 Cole Ave. Suite 308",
+  phone: "(469) 360-5805",
+  phoneHref: "tel:+14693605805",
+  email: "support@marvelcustomhomes.com",
+  street: "10830 N. Central Expressway Ste. 130",
   city: "Dallas",
   region: "TX",
-  postal: "75204",
+  postal: "75231",
   url: "https://marvelcustomhomes.com",
   serviceAreas: ["Allen", "Fate", "Heath", "Mansfield", "McKinney", "Midlothian", "Rockwall"],
 };
@@ -75,7 +75,7 @@ export const localBusinessJsonLd = {
   "@type": "GeneralContractor",
   name: BUSINESS.name,
   url: BUSINESS.url,
-  telephone: "+1-214-886-7527",
+  telephone: "+1-469-360-5805",
   email: BUSINESS.email,
   address: {
     "@type": "PostalAddress",
