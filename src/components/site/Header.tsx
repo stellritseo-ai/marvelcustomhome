@@ -67,7 +67,11 @@ export function Header() {
   const rafMeasureRef = useRef<number | null>(null);
 
   const overHero =
-    (path === "/" || path === "/about" || path === "/projects" || path === "/our-homes") &&
+    (path === "/" ||
+      path === "/about" ||
+      path === "/projects" ||
+      path === "/our-homes" ||
+      path === "/blogs") &&
     !scrolled;
 
   function positionServicesPopover() {
