@@ -71,7 +71,8 @@ export function Header() {
       path === "/about" ||
       path === "/projects" ||
       path === "/our-homes" ||
-      path === "/blogs") &&
+      path === "/blogs" ||
+      path === "/contact") &&
     !scrolled;
 
   function positionServicesPopover() {
