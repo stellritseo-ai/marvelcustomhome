@@ -69,6 +69,7 @@ export function Header() {
   const overHero =
     (path === "/" ||
       path === "/about" ||
+      path === "/services" ||
       path === "/projects" ||
       path === "/our-homes" ||
       path === "/blogs" ||

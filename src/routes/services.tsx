@@ -1,33 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CollectionsSection } from "@/components/site/CollectionsSection";
 import { CtaSection } from "@/components/site/CtaSection";
-import { PageHeader } from "@/components/site/PageHeader";
-import { ServicesSection } from "@/components/site/ServicesSection";
-import { IMAGES } from "@/lib/images";
-import { pageHead } from "@/lib/site";
+import { ServicesDedicatedShowcase } from "@/components/site/ServicesDedicatedShowcase";
+import { ServicesExecutionMatrix } from "@/components/site/ServicesExecutionMatrix";
+import { ServicesHero } from "@/components/site/ServicesHero";
+import { localBusinessJsonLd, pageHead } from "@/lib/site";
 
 export const Route = createFileRoute("/services")({
-  head: () =>
-    pageHead(
-      "Services | Custom Home Construction & Interiors — Marvel",
-      "Complete home construction, architectural design consultation, interior finish-out and custom interior features in Dallas–Fort Worth.",
+  head: () => ({
+    ...pageHead(
+      "Services | Complete Home Construction, Design Consultation, Interior Finish Out & Double Vanity — Marvel Custom Homes",
+      "Explore Marvel Custom Homes services in Dallas–Fort Worth: Complete Home Construction, Design Consultation – Architectural, Interior Finish Out, and custom Double Vanity installations.",
     ),
-  component: () => (
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusinessJsonLd) }],
+  }),
+  component: ServicesPage,
+});
+
+function ServicesPage() {
+  return (
     <>
-      <PageHeader
-        eyebrow="Services"
-        title={
-          <>
-            Four Disciplines. <em className="italic">One Standard.</em>
-          </>
-        }
-        intro="Every Marvel commission is guided by the same team from first sketch to final walkthrough."
-        img={IMAGES.living}
-        alt="Double-height living room with travertine fireplace"
-      />
-      <ServicesSection />
-      <CollectionsSection />
+      <ServicesHero />
+      <ServicesDedicatedShowcase />
+      <ServicesExecutionMatrix />
       <CtaSection />
     </>
-  ),
-});
+  );
+}

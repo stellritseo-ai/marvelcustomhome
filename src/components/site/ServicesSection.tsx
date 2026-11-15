@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import completeHomeConstruction from "@/assets/complete-home-construction.jpg";
 import designConsultation from "@/assets/Design consultation - Architectural.png";
@@ -199,8 +200,9 @@ export function ServicesSection() {
                   </h3>
                   <p className="mt-4 max-w-xl leading-[1.8] text-muted-foreground">{s.copy}</p>
                   <div className="mt-7">
-                    <button
-                      type="button"
+                    <Link
+                      to="/services"
+                      hash={s.id}
                       className="group/btn relative inline-flex min-h-12 cursor-pointer items-center gap-4 overflow-hidden rounded-[50px] bg-charcoal py-2 pr-2 pl-7 font-sans text-[0.75rem] font-semibold uppercase tracking-[0.22em] text-ivory shadow-[0_14px_30px_-10px_oklch(0.18_0.006_120/0.38)] transition-all duration-500 ease-[var(--ease-lux)] hover:-translate-y-0.5 hover:bg-[#171817] hover:shadow-[0_18px_38px_-10px_oklch(0.18_0.006_120/0.55)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#6B593B]"
                     >
                       <span
@@ -214,7 +216,7 @@ export function ServicesSection() {
                       >
                         <ArrowUpRight className="h-4 w-4" />
                       </span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </article>
