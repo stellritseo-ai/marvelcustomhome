@@ -24,10 +24,20 @@ export const contactSchema = z.object({
     .trim()
     .regex(/^[0-9+().\-\s]{7,20}$/, "Please enter a valid phone number"),
   address: z.string().trim().max(200).optional().or(z.literal("")),
-  projectType: z.enum(PROJECT_TYPES, { errorMap: () => ({ message: "Please choose a project type" }) }),
+  projectType: z.enum(PROJECT_TYPES, {
+    errorMap: () => ({ message: "Please choose a project type" }),
+  }),
   budget: z.enum(BUDGETS, { errorMap: () => ({ message: "Please choose a budget range" }) }),
   vision: z.string().trim().min(10, "Tell us a little more (10+ characters)").max(2000),
   website: z.string().max(0).optional().or(z.literal("")), // honeypot
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
+
+export const newsletterSchema = z.object({
+  email: z.string().trim().email("Please enter a valid email address").max(255),
+  source: z.string().trim().max(100).optional().default("Website"),
+  website: z.string().max(0).optional().or(z.literal("")), // honeypot
+});
+
+export type NewsletterInput = z.infer<typeof newsletterSchema>;

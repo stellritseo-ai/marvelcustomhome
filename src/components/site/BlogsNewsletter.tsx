@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check, Mail, MapPin, Phone, Sparkles } from "lucide-react";
 import processBg from "@/assets/processbg.jpg";
+import { submitNewsletter } from "@/lib/contact.functions";
 import { BUSINESS } from "@/lib/site";
 import { Eyebrow } from "./Eyebrow";
 import { Reveal } from "./Reveal";
@@ -31,11 +32,22 @@ export function BlogsNewsletter() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email.trim()) return;
+    const emailToSubmit = email.trim();
     setSubscribed(true);
     setEmail("");
+    try {
+      await submitNewsletter({
+        data: {
+          email: emailToSubmit,
+          source: "Blog Journal Dispatch Form",
+        },
+      });
+    } catch (err) {
+      console.error("Blog newsletter subscription error:", err);
+    }
   }
 
   return (

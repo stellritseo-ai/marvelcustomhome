@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight, Check, Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import { submitNewsletter } from "@/lib/contact.functions";
 import { BUSINESS } from "@/lib/site";
 import { Logo } from "./Logo";
 
@@ -85,11 +86,22 @@ export function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
-  function handleSubscribe(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubscribe(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!newsletterEmail.trim()) return;
+    const emailToSubmit = newsletterEmail.trim();
     setSubscribed(true);
     setNewsletterEmail("");
+    try {
+      await submitNewsletter({
+        data: {
+          email: emailToSubmit,
+          source: "Footer Newsletter Form",
+        },
+      });
+    } catch (err) {
+      console.error("Footer newsletter subscription error:", err);
+    }
   }
 
   return (
