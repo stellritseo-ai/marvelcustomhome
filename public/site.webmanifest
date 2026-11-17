@@ -1,6 +1,9 @@
 {
   "name": "Marvel Custom Homes",
   "short_name": "Marvel Homes",
+  "description": "Premier luxury custom home builder and architectural design studio in Dallas, TX.",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "/favicon-192x192.png",
@@ -17,4 +20,3 @@
   "background_color": "#FAF8F5",
   "display": "standalone"
 }
-

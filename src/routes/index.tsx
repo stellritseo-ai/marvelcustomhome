@@ -10,15 +10,19 @@ import { ServicesSection } from "@/components/site/ServicesSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { WelcomeSection } from "@/components/site/WelcomeSection";
 import { WhySection } from "@/components/site/WhySection";
-import { localBusinessJsonLd, pageHead } from "@/lib/site";
+import { localBusinessJsonLd, pageHead, websiteJsonLd } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     ...pageHead(
       "Marvel Custom Homes | Luxury Custom Home Builder in Dallas, TX",
-      "Luxury custom home construction, architectural design consultation and interior finish-out in Dallas and North Texas.",
+      "Premier luxury custom home construction, architectural design consultation, and bespoke interior finish-out across Dallas-Fort Worth and North Texas.",
+      { path: "/" },
     ),
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusinessJsonLd) }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(localBusinessJsonLd) },
+      { type: "application/ld+json", children: JSON.stringify(websiteJsonLd) },
+    ],
   }),
   component: Index,
 });

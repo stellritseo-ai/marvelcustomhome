@@ -8,15 +8,33 @@ import { InteriorFinishOutPage } from "@/components/site/InteriorFinishOutPage";
 import { ServicesDedicatedShowcase } from "@/components/site/ServicesDedicatedShowcase";
 import { ServicesExecutionMatrix } from "@/components/site/ServicesExecutionMatrix";
 import { ServicesHero } from "@/components/site/ServicesHero";
-import { localBusinessJsonLd, pageHead } from "@/lib/site";
+import { createBreadcrumbJsonLd, localBusinessJsonLd, pageHead, servicesJsonLd } from "@/lib/site";
 
 export const Route = createFileRoute("/services")({
   head: () => ({
     ...pageHead(
       "Services | Complete Home Construction, Architectural Design, Interior Finish Out & Double Vanity — Marvel Custom Homes",
       "Explore Marvel Custom Homes dedicated services in Dallas–Fort Worth: Complete Home Construction, Architectural Design Consultation, Interior Finish Out, and Double Vanity installations.",
+      {
+        path: "/services",
+        keywords: [
+          "complete home construction dallas",
+          "architectural design consultation dfw",
+          "interior finish out texas",
+          "double vanity installation dallas",
+          "general contractor dallas tx",
+          "custom home building services",
+        ],
+      },
     ),
-    scripts: [{ type: "application/ld+json", children: JSON.stringify(localBusinessJsonLd) }],
+    scripts: [
+      { type: "application/ld+json", children: JSON.stringify(localBusinessJsonLd) },
+      { type: "application/ld+json", children: JSON.stringify(servicesJsonLd) },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(createBreadcrumbJsonLd([{ name: "Services", path: "/services" }])),
+      },
+    ],
   }),
   component: ServicesPage,
 });

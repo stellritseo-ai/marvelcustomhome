@@ -83,17 +83,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Marvel Custom Homes | Luxury Custom Homes in Dallas" },
+      { title: "Marvel Custom Homes | Luxury Custom Home Builder in Dallas, TX" },
       {
         name: "description",
-        content: "Luxury custom home building and interior design in Dallas, TX.",
+        content:
+          "Premier luxury custom home builder in Dallas and North Texas. Delivering turnkey ground-up construction, architectural design consultation, and bespoke interior craftsmanship.",
       },
       { name: "author", content: "Marvel Custom Homes" },
-      { property: "og:title", content: "Marvel Custom Homes" },
+      { name: "publisher", content: "Marvel Custom Homes" },
+      { name: "theme-color", content: "#121110" },
       {
-        property: "og:description",
-        content: "Luxury custom home building and interior design in Dallas, TX.",
+        name: "robots",
+        content: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
       },
+      { property: "og:site_name", content: "Marvel Custom Homes" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
